@@ -1,0 +1,250 @@
+:root {
+    --bg: #f5f7fb;
+    --card: #ffffff;
+    --muted: #6b7280;
+    --primary: #0f62fe;
+    --accent: #0b5bd7;
+    --radius: 12px;
+    --shadow: 0 6px 20px rgba(15, 22, 39, 0.08);
+    --mono: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+* {
+    box-sizing: border-box
+}
+
+body {
+    font-family: var(--mono);
+    background: var(--bg);
+    margin: 0;
+    color: #0b1320;
+    line-height: 1.45
+}
+
+.container {
+    max-width: 1100px;
+    margin: 28px auto;
+    padding: 0 18px
+}
+
+.topbar {
+    background: #071133;
+    color: white;
+    padding: 14px 0;
+    box-shadow: 0 2px 6px rgba(2, 6, 23, 0.12)
+}
+
+.topbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
+
+.topbar .brand a {
+    color: white;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 1.15rem
+}
+
+nav a {
+    color: #cfe0ff;
+    margin-left: 12px;
+    text-decoration: none
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px
+}
+
+.card {
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 18px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(12, 17, 26, 0.04)
+}
+
+.col-2 {
+    min-height: 220px
+}
+
+.muted {
+    color: var(--muted);
+    font-size: 0.95rem
+}
+
+.job-description {
+    white-space: pre-line;
+    margin-top: 6px;
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.6;
+    max-height: 260px;
+    overflow-y: auto;
+    padding-right: 6px;
+}
+
+.job-form input[type=text],
+.job-form textarea,
+input[type=file] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #e6eef8;
+    margin-top: 6px
+}
+
+.form-row {
+    margin-top: 12px
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: transparent;
+    border: 1px solid #dbe9ff;
+    color: #09306a;
+    text-decoration: none;
+}
+
+.btn.primary {
+    background: linear-gradient(180deg, var(--primary), var(--accent));
+    color: white;
+    border: none
+}
+
+.btn.small {
+    padding: 6px 8px;
+    font-size: 0.9rem;
+}
+
+.job-list {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0
+}
+
+.job-item {
+    padding: 10px 8px;
+    border-radius: 8px;
+    transition: background .12s
+}
+
+.job-item:hover {
+    background: #f1f6ff
+}
+
+.flex-between {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between
+}
+
+.right {
+    display: flex;
+    gap: 8px;
+    align-items: center
+}
+
+.cv-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.cv-card {
+    background: var(--card);
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(12, 17, 26, 0.04)
+}
+
+.cv-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px
+}
+
+.cv-title {
+    font-weight: 600
+}
+
+.cv-meta {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0b1320;
+}
+
+.cv-body {
+    font-size: 0.95rem
+}
+
+.compact {
+    list-style: disc;
+    margin: 6px 0 8px 18px;
+    padding: 0
+}
+
+.chips {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 6px 0
+}
+
+.chips li {
+    background: #f1f8ff;
+    color: #0b3a78;
+    padding: 6px 8px;
+    border-radius: 20px;
+    font-size: 0.9rem
+}
+
+.cv-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px
+}
+
+.flash-wrap {
+    margin: 12px 0
+}
+
+.flash {
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 8px
+}
+
+.flash.success {
+    background: #ecfdf5;
+    color: #065f46;
+    border: 1px solid rgba(6, 95, 70, 0.08)
+}
+
+.flash.warning {
+    background: #fff7ed;
+    color: #92400e;
+    border: 1px solid rgba(146, 64, 14, 0.06)
+}
+
+.flash.error {
+    background: #fff1f2;
+    color: #641220;
+    border: 1px solid rgba(100, 18, 32, 0.06)
+}
+
+.footer {
+    margin: 24px auto;
+    text-align: center;
+    color: var(--muted)
+}

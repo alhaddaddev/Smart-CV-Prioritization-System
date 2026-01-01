@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="grid">
+    <section class="card col-2">
+        <h2>Creat Job</h2>
+        <form action="{{ url_for('create_job') }}" method="post" class="job-form">
+            <label>Title</label>
+            <input type="text" name="title" required>
+            <label>Job Description</label>
+            <textarea name="description" rows="6" required></textarea>
+            <div class="form-row">
+                <button type="submit" class="btn primary">Create Job</button>
+            </div>
+        </form>
+    </section>
+
+    <section class="card col-2">
+        <h2>Existing Jobs</h2>
+        {% if jobs %}
+        <ul class="job-list">
+            {% for j in jobs %}
+            <li class="job-item">
+                <a href="{{ url_for('job_detail', job_id=j.id) }}"><strong>{{ j.title }}</strong></a>
+                <div class="muted">Created: {{ j.created_at[:10] }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <p class="muted">No jobs yet. Create one!</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

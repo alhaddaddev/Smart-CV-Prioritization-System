@@ -1,0 +1,9 @@
+Flask
+Werkzeug
+pdfplumber
+python-docx
+easyocr
+spacy
+sentence-transformers
+torch
+Pillow

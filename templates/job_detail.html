@@ -1,0 +1,97 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="card">
+    <div class="flex-between">
+        <div>
+            <h2>{{ job.title }}</h2>
+            <div class="job-description">{{ job.description }}</div>
+        </div>
+        <div class="right">
+            <form action="{{ url_for('delete_job', job_id=job.id) }}" method="post" style="display:inline">
+                <button class="btn" type="submit" style="line-height: 1.5;"
+                    onclick="return confirm('Delete job? This will remove attachments but keep CVs in pool.')">Delete
+                </button>
+            </form>
+            <a href="{{ url_for('index') }}" class="btn">Back</a>
+        </div>
+    </div>
+
+    <hr>
+    <h3>Upload CVs</h3>
+    <form method="POST" enctype="multipart/form-data" id="upload-job-form">
+        <input type="hidden" name="action" value="upload">
+        <input type="file" name="cvs" multiple style="display:none;" id="job-file-input">
+        <div class="form-row">
+            <button type="button" class="btn primary" id="job-upload-btn">Upload</button>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById('job-upload-btn').addEventListener('click', function () {
+            document.getElementById('job-file-input').click();
+        });
+
+        document.getElementById('job-file-input').addEventListener('change', function () {
+            if (this.files.length) document.getElementById('upload-job-form').submit();
+        });
+    </script>
+
+    <hr>
+    <h3>Attach from CV Pool</h3>
+    <form method="POST">
+        <input type="hidden" name="action" value="attach">
+        {% if unattached %}
+        <div style="margin-top:8px">
+            <select name="existing_cvs" multiple size="6" style="width:100%; padding:8px; border-radius:6px">
+                {% for u in unattached %}
+                <option value="{{ u.filename }}">{{ u.filename }} — {{ u.upload_time[:10] }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-row" style="margin-top:8px">
+            <button type="submit" class="btn">Attach Selected</button>
+        </div>
+        {% else %}
+        <p class="muted">No CVs available.</p>
+        {% endif %}
+    </form>
+</div>
+
+{% if cvs %}
+<h3>CVs attached to this job</h3>
+<div class="cv-grid">
+    {% for cv in cvs %}
+    <div class="cv-card">
+        <div class="cv-header">
+            <div class="cv-title">{{ cv.filename }}</div>
+            <div class="cv-meta">Score: <strong>{{ "%.2f"|format(cv.score) }}</strong> — {{ cv.status }}</div>
+        </div>
+        <div class="cv-body">
+            <strong>Flags</strong>
+            {% if cv.flags %}
+            <ul class="compact">
+                {% for f in cv.flags %}<li>{{ f }}</li>{% endfor %}
+            </ul>
+            {% else %}
+            <div class="muted">None</div>
+            {% endif %}
+
+            <strong>Insights</strong>
+            {% if cv.nlp_insights %}
+            <ul class="chips">
+                {% for s in cv.nlp_insights %}<li>{{ s }}</li>{% endfor %}
+            </ul>
+            {% else %}
+            <div class="muted">No insights detected</div>
+            {% endif %}
+        </div>
+        <div class="cv-footer">
+            <a class="btn small" target="_blank" href="{{ url_for('uploaded_file', filename=cv.filename) }}">Open</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="muted">No CVs attached to this job yet.</p>
+{% endif %}
+{% endblock %}

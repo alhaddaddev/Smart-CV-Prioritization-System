@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="card">
+    <div class="flex-between">
+        <h2>CV Pool</h2>
+        <a href="{{ url_for('index') }}" class="btn">Back</a>
+    </div>
+
+    <form method="GET" style="margin-top:12px; display:flex; gap:8px; align-items:center">
+        <div>
+            <label>From</label><br>
+            <input type="date" name="date_from" value="{{ date_from }}">
+        </div>
+        <div>
+            <label>To</label><br>
+            <input type="date" name="date_to" value="{{ date_to }}">
+        </div>
+        <div style="align-self:flex-end">
+            <button class="btn" type="submit">Filter</button>
+        </div>
+    </form>
+
+    <hr>
+
+    <h3>Upload CVs</h3>
+    <form method="POST" enctype="multipart/form-data" id="upload-pool-form">
+        <input type="file" name="cvs_pool" multiple style="display:none;" id="pool-file-input">
+        <div class="form-row" style="margin-top:8px">
+            <button type="button" class="btn primary" id="pool-upload-btn">Upload</button>
+        </div>
+    </form>
+
+    <script>
+        document.getElementById('pool-upload-btn').addEventListener('click', function () {
+            document.getElementById('pool-file-input').click();
+        });
+
+        document.getElementById('pool-file-input').addEventListener('change', function () {
+            if (this.files.length) document.getElementById('upload-pool-form').submit();
+        });
+    </script>
+</div>
+
+<hr>
+
+{% if cvs %}
+<div class="cv-grid">
+    {% for cv in cvs %}
+    <div class="cv-card">
+        <div class="cv-header" style="flex-direction:column; align-items:flex-start;">
+            <div class="cv-title">{{ cv.filename }}</div>
+            <div class="muted">Uploaded: {{ cv.upload_time[:10] }}</div>
+        </div>
+
+        <div class="cv-footer">
+            <a class="btn small" target="_blank" href="{{ url_for('uploaded_file', filename=cv.filename) }}">Open</a>
+            <form action="{{ url_for('delete_cv', filename=cv.filename) }}" method="post" style="display:inline">
+                <button class="btn" type="submit" onclick="return confirm('Delete this CV?')">Delete</button>
+            </form>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="muted">No CVs uploaded yet.</p>
+{% endif %}
+{% endblock %}
