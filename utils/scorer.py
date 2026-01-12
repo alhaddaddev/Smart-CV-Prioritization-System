@@ -22,18 +22,18 @@ def get_semantic_model():
 def score_cv(path, jd_text):
     """
     Final scoring:
-    - Named entities: 20%
+    - Named entities: 30%
     - Content richness: 30%
-    - JD semantic match: 50%
+    - JD semantic match: 40%
     """
 
     # Constants
-    MAX_PHRASES = 120
+    MAX_PHRASES = 160
     UI_INSIGHT_LIMIT = 20
     ENTITY_SCORE_LIMIT = 30
-    NAMED_ENTITY_WEIGHT = 20
+    NAMED_ENTITY_WEIGHT = 30
     CONTENT_RICHNESS_WEIGHT = 30
-    SEMANTIC_MATCH_WEIGHT = 50
+    SEMANTIC_MATCH_WEIGHT = 40
 
     # Extract text & NLP
     text = extract_text(path)
@@ -62,7 +62,7 @@ def score_cv(path, jd_text):
     if len(phrases) < 25:
         flags.append("Low information content")
 
-    # --- NAMED ENTITY SCORE (20%) ---
+    # --- NAMED ENTITY SCORE (30%) ---
     entity_count = min(len(entity_score), ENTITY_SCORE_LIMIT)
     score += (entity_count / ENTITY_SCORE_LIMIT) * NAMED_ENTITY_WEIGHT
 
@@ -70,7 +70,7 @@ def score_cv(path, jd_text):
     phrase_count = min(len(phrases), MAX_PHRASES)
     score += (phrase_count / MAX_PHRASES) * CONTENT_RICHNESS_WEIGHT
 
-    # --- JD SEMANTIC MATCH (50%) ---
+    # --- JD SEMANTIC MATCH (40%) ---
     sim = 0
     if jd_text.strip():
         model = get_semantic_model()

@@ -76,11 +76,14 @@ def job_detail(job_id):
     cvs = get_cvs_for_job(job_id)
 
     for cv in cvs:
+        if cv["score"] is not None:
+            continue
+        
         path = os.path.join(app.config["UPLOAD_FOLDER"], cv["filename"])
         score, flags, insights = process_cv(path, job["description"])
 
         status = (
-            "High" if score >= 80 else
+            "High" if score >= 75 else
             "Medium" if score >= 50 else
             "Low"
         )

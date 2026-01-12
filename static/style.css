@@ -84,7 +84,7 @@ nav a {
     line-height: 1.6;
     max-height: 260px;
     overflow-y: auto;
-    padding-right: 6px;
+    padding-right: 6px
 }
 
 .job-form input[type=text],
@@ -108,7 +108,7 @@ input[type=file] {
     background: transparent;
     border: 1px solid #dbe9ff;
     color: #09306a;
-    text-decoration: none;
+    text-decoration: none
 }
 
 .btn.primary {
@@ -119,13 +119,15 @@ input[type=file] {
 
 .btn.small {
     padding: 6px 8px;
-    font-size: 0.9rem;
+    font-size: 0.9rem
 }
 
 .job-list {
     list-style: none;
     padding: 0;
-    margin: 8px 0
+    margin: 8px 0;
+    max-height: 300px;
+    overflow-y: auto
 }
 
 .job-item {
@@ -153,7 +155,7 @@ input[type=file] {
 .cv-grid {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 12px
 }
 
 .cv-card {
@@ -178,7 +180,7 @@ input[type=file] {
 .cv-meta {
     font-size: 1rem;
     font-weight: 600;
-    color: #0b1320;
+    color: #0b1320
 }
 
 .cv-body {
